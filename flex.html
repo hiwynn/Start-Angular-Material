@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <style>
+        .flex-wrap{
+            width: 700px;
+            padding: 10px;
+            margin: 30px auto;
+            border:1px solid #ddd;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body ng-app="inputBasicDemo">
+    <div ng-controller="DemoCtrl" ng-cloak class="md-inline-form flex-wrap">
+
+        <md-content layout="row" layout-wrap>
+
+            <md-input-container flex="50">
+                <label>Icon</label>
+                <input ng-model="user.icon">
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Title</label>
+                <input ng-model="user.title">
+            </md-input-container>
+
+            <!--<md-input-container flex="100">
+                <label>Description</label>
+                <input ng-model="user.email" type="email">
+            </md-input-container>
+
+            <md-input-container flex="100">
+                <label>url</label>
+                <input ng-model="user.url">
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Script</label>
+                <input ng-model="user.script">
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Version</label>
+                <input ng-model="user.version">
+            </md-input-container>-->
+
+        </md-content>
+
+    </div>
+    <script>
+        angular
+            .module('inputBasicDemo', ['ngMaterial', 'ngMessages'])
+            .controller('DemoCtrl', function($scope,$http) {
+                $scope.user = {
+                    title: 'Developer',
+                    email: 'ipsum@lorem.com'
+                };
+                $http({
+                    method: 'GET',
+                    url: 'a.json'
+                }).success(function(data,state){
+                    console.log(state);
+                }).error(function(data){
+                    console.log(data);
+                })
+            });
+    </script>
+</body>
+</html>

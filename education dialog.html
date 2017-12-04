@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <style>
+        md-toolbar {
+            padding-left: 22px;
+        }
+
+        .md-dialog-content {
+            background: #f5f5f5;
+            border-bottom: 1px solid #bdbdbd;
+        }
+
+        .input-area {
+            width: 50%;
+            margin: 10px;
+            border: 1px solid #c5c5c5;
+            background: #fff;
+        }
+
+        .input-area md-input-container {
+            margin: 20px;
+            width: 80%;
+        }
+
+        .input-area label {
+            line-height: 94px;
+        }
+
+        md-dialog-actions {
+            padding-right: 22px;
+        }
+
+        md-dialog-actions .md-button {
+            margin: 15px 10px;
+        }
+    </style>
+</head>
+<body ng-app="tabsDemoDynamicHeight" ng-controller="ctrl">
+<div ng-cloak>
+    <md-content style="width: 660px; margin: 50px auto;">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Edit Assignment</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content class="md-dialog-content">
+            <div layout="row">
+                <div class="input-area">
+                    <md-input-container>
+                        <label>Enrollment Date</label>
+                        <md-select ng-model="userState">
+                            <md-option>None</md-option>
+                            <md-option>state1</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div class="input-area">
+                    <md-input-container>
+                        <label>Enrollment Code</label>
+                        <md-select ng-model="userState">
+                            <md-option>None</md-option>
+                            <md-option>state1</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row">
+                <div class="input-area">
+                    <md-input-container>
+                        <label>Leave Date</label>
+                        <md-select ng-model="userState">
+                            <md-option>None</md-option>
+                            <md-option>state1</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div class="input-area">
+                    <md-input-container>
+                        <label>Leave Code</label>
+                        <md-select ng-model="userState">
+                            <md-option>None</md-option>
+                            <md-option>state1</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-butto class="md-raised">Cancel</md-butto>
+            <md-button class="md-primary md-raised" type="submit">Save</md-button>
+        </md-dialog-actions>
+    </md-content>
+</div>
+<script>
+    angular.module('tabsDemoDynamicHeight', ['ngMaterial'])
+        .controller('ctrl', function () {
+            this.userState = '';
+        })
+</script>
+</body>
+</html>
+
+

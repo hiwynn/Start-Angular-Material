@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+</head>
+<body ng-app="contactChipsDemo">
+<div ng-controller="ContactChipDemoCtrl as ctrl" layout="column" ng-cloak>
+    <md-content class="md-padding autocomplete" layout="column">
+        <md-contact-chips
+                ng-model="ctrl.contacts"
+                md-contacts="ctrl.querySearch($query)"
+                md-contact-name="name"
+                md-require-match="true"
+                filter-selected="ctrl.filterSelected"
+                placeholder="To">
+        </md-contact-chips>
+    </md-content>
+</div>
+<script>
+    (function () {
+
+        angular
+            .module('contactChipsDemo', ['ngMaterial'])
+            .controller('ContactChipDemoCtrl', DemoCtrl);
+
+        function DemoCtrl ($q, $timeout) {
+            var self = this;
+            var pendingSearch, cancelSearch = angular.noop;
+            var lastSearch;
+
+            self.allContacts = loadContacts();
+            self.contacts = [];
+            self.asyncContacts = [];
+            self.filterSelected = true;
+
+            self.querySearch = querySearch;
+            self.delayedQuerySearch = delayedQuerySearch;
+
+            function querySearch (criteria) {
+                return criteria ? self.allContacts.filter(createFilterFor(criteria)) : [];
+            }
+
+            function delayedQuerySearch(criteria) {
+                if ( !pendingSearch )  {
+                    cancelSearch();
+                    return pendingSearch = $q(function(resolve, reject) {
+                        cancelSearch = reject;
+                        resolve( self.querySearch(criteria) );
+                        refreshDebounce();
+                    });
+                }
+                return pendingSearch;
+            }
+
+            function refreshDebounce() {
+                lastSearch = 0;
+                pendingSearch = null;
+                cancelSearch = angular.noop;
+            }
+
+            function createFilterFor(query) {
+                var lowercaseQuery = angular.lowercase(query);
+
+                return function filterFn(contact) {
+                    return (contact._lowername.indexOf(lowercaseQuery) != -1);
+                };
+
+            }
+
+            function loadContacts() {
+                var contacts = [
+                    'Marina Augustine',
+                    'Oddr Sarno',
+                    'Nick Giannopoulos',
+                    'Narayana Garner',
+                    'Anita Gros',
+                    'Megan Smith',
+                    'Tsvetko Metzger',
+                    'Hector Simek',
+                    'Some-guy withalongalastaname'
+                ];
+
+                return contacts.map(function (c, index) {
+                    var contact = {
+                        name: c,
+                    };
+                    contact._lowername = contact.name.toLowerCase();
+                    return contact;
+                });
+            }
+        }
+
+    })();
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="../../jquery.min.js"></script>
+</head>
+<body ng-app="inputBasicDemo">
+<div ng-cloak class="md-inline-form flex-wrap">
+    <div ng-controller="SelectHeaderController" class="md-padding" ng-cloak>
+        <div>
+            <h1 class="md-title">Pick a vegetable below</h1>
+            <div layout="row">
+                {{selectedVegetables}}
+                {{searchTerm | json}}
+                <md-input-container>
+                    <label>Vegetables</label>
+                    <md-select ng-model="selectedVegetables"
+                               multiple>
+                        <md-select-header class="demo-select-header">
+                            <input ng-model="searchTerm">
+                        </md-select-header>
+                        <md-optgroup label="vegetables">
+                            <md-option ng-value="vegetable" ng-repeat="vegetable in vegetables">
+                                {{vegetable}}
+                            </md-option>
+                        </md-optgroup>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    angular
+        .module('inputBasicDemo', ['ngMaterial', 'ngMessages'])
+        .controller('SelectHeaderController', function ($scope, $http, $element) {
+            $scope.vegetables = ['Corn' ,'Onions' ,'Kale' ,'Arugula' ,'Peas', 'Zucchini'];
+        });
+</script>
+</body>
+</html>

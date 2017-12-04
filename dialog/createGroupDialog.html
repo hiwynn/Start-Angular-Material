@@ -1,0 +1,163 @@
+<style>
+    .input-area {
+        margin: 10px;
+        border: 1px solid #c5c5c5;
+        background: #fff;
+        padding: 0 20px;
+    }
+
+    md-input-container {
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .orange .md-off {
+        border-color: #f5a623!important;
+    }
+    .orange .md-on {
+        background-color: #f5a623;
+    }
+    .orange .md-ink-ripple {
+        color: #f5a623!important;
+    }
+
+    .red .md-off {
+        border-color: #d0021b!important;
+    }
+    .red .md-on {
+        background-color: #d0021b;
+    }
+    .red .md-ink-ripple {
+        color: #d0021b!important;
+    }
+
+    .blue .md-off {
+        border-color: #4a90e2!important;
+    }
+    .blue .md-on {
+        background-color: #4a90e2;
+    }
+    .blue .md-ink-ripple {
+        color: #4a90e2!important;
+    }
+
+    .green .md-off {
+        border-color: #417505!important;
+    }
+    .green .md-on {
+        background-color: #417505;
+    }
+    .green .md-ink-ripple {
+        color: #417505!important;
+    }
+
+    .purple .md-off {
+        border-color: #9013fe!important;
+    }
+    .purple .md-on {
+        background-color: #9013fe;
+    }
+    .purple .md-ink-ripple {
+        color: #9013fe!important;
+    }
+
+    .gray .md-off {
+        border-color: #b1bdca!important;
+    }
+    .gray .md-on {
+        background-color: #b1bdca;
+    }
+    .gray .md-ink-ripple {
+        color: #b1bdca!important;
+    }
+
+    .mazarine .md-off {
+        border-color: #4a459e!important;
+    }
+    .mazarine .md-on {
+        background-color: #4a459e;
+    }
+    .mazarine .md-ink-ripple {
+        color: #4a459e!important;
+    }
+</style>
+<md-dialog class="transfer-teacher-dialog" style="width: 700px;">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>New Program Period</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="md-dialog-content" style="background: #f5f5f5; border-bottom: 1px solid #bdbdbd">
+        <div layout="row">
+            <div class="input-area" flex>
+                <md-input-container>
+                    <label>Appointment Name</label>
+                    <input type="text" ng-model="appointment.Title">
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div class="input-area group-owner" flex layout="row">
+                <label flex="40">Teacher</label>
+                <md-input-container flex>
+                    <md-select ng-model="appointment.OwnerPersonId" aria-label="Teacher">
+                        <md-option ng-repeat="teacher in teachers" ng-value="teacher.PersonId">
+                            {{ teacher.DisplayName }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="input-area" flex layout="row">
+                <label flex="40" style="margin: auto;">Max students</label>
+                <md-input-container flex>
+                    <input type="number" min="0" ng-model="appointment.NumSeats">
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div class="input-area" flex>
+                <md-input-container flex>
+                    <label>Start Time</label>
+                    <input type="text"
+                           ng-model="appointment.StartTime"
+                           ui-mask="99:99:99"
+                           ui-options="{addDefaultPlaceholder: false}"
+                           model-view-value="true"/>
+                </md-input-container>
+            </div>
+            <div class="input-area" flex layout="column">
+                <label class="color-title">Color</label>
+                <div class="choose-color">
+                    <md-radio-group ng-model="appointment.ColorId" layout="row">
+                        <md-radio-button ng-repeat="color in colorList" ng-value="$index + 1" class="{{ color }}"
+                                         aria-label="color"></md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+        </div>
+        <div layout="row">
+            <div class="input-area" flex layout="column">
+                <label class="occurance-title">Re-occurance</label>
+                <div class="check-area">
+                    <md-checkbox ng-model="class.Sun" aria-label="day" ng-disabled="appointment.Once">Su</md-checkbox>
+                    <md-checkbox ng-model="class.Mon" aria-label="day" ng-disabled="appointment.Once">M</md-checkbox>
+                    <md-checkbox ng-model="class.Tue" aria-label="day" ng-disabled="appointment.Once">T</md-checkbox>
+                    <md-checkbox ng-model="class.Wed" aria-label="day" ng-disabled="appointment.Once">W</md-checkbox>
+                    <md-checkbox ng-model="class.Thu" aria-label="day" ng-disabled="appointment.Once">Th</md-checkbox>
+                    <md-checkbox ng-model="class.Fri" aria-label="day" ng-disabled="appointment.Once">F</md-checkbox>
+                    <md-checkbox ng-model="class.Sat" aria-label="day" ng-disabled="appointment.Once">S</md-checkbox>
+                    <span class="separate-line"> | </span>
+                    <md-checkbox ng-model="appointment.Once" aria-label="once"
+                                 ng-disabled="class.Sun || class.Mon || class.Tue || class.Wed || class.Thu ||class.Fri || class.Sat">
+                        Once
+                    </md-checkbox>
+                </div>
+            </div>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button class="md-raised" ng-click="cancel()" style="margin: 15px 10px;">Cancel</md-button>
+        <md-button class="md-primary md-raised" ng-click="save()" style="margin: 15px 10px;">Save
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

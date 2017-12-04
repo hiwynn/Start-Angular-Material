@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+</head>
+<body ng-app="inputBasicDemo">
+<div ng-controller="DemoCtrl" ng-cloak class="md-inline-form flex-wrap">
+    <md-content layout-padding>
+        <form name="projectForm">
+
+                <md-input-container flex="50">
+                    <label>Client Name</label>
+                    <input required name="clientName" ng-model="project.clientName">
+                    <div ng-messages="projectForm.clientName.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+
+        </form>
+    </md-content>
+
+</div>
+<script>
+    angular
+        .module('inputBasicDemo', ['ngMaterial', 'ngMessages'])
+        .controller('DemoCtrl', function($scope,$http) {
+
+        });
+</script>
+</body>
+</html>

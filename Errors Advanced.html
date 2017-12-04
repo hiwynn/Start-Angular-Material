@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+</head>
+<body ng-app="inputBasicDemo">
+<div ng-controller="DemoCtrl" ng-cloak class="md-inline-form flex-wrap">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Email</label>
+        <input name="email" ng-model="user.email"
+               required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+
+        <div class="hint" ng-show="showHints">How can we reach you?</div>
+
+        <div ng-messages="userForm.email.$error" ng-hide="showHints">
+            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                Your email must be between 10 and 100 characters long and look like an e-mail address.
+            </div>
+        </div>
+    </md-input-container>
+</div>
+<script>
+    angular
+        .module('inputBasicDemo', ['ngMaterial', 'ngMessages'])
+        .controller('DemoCtrl', function($scope,$http) {
+            $scope.showHints = true;
+
+        });
+</script>
+</body>
+</html>

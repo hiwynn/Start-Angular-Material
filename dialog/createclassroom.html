@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body ng-app="tabsDemoDynamicHeight" ng-controller="ctrl">
+<div ng-cloak>
+    <md-content>
+        <md-button class="md-raised" ng-click="showDialog()">Button</md-button>
+    </md-content>
+</div>
+<script>
+    angular.module('tabsDemoDynamicHeight', ['ngMaterial'])
+        .controller('ctrl', function ($scope, $mdDialog) {
+            $scope.showDialog = function () {
+                $mdDialog.show({
+                    controller         : createGroupController,
+                    parent             : angular.element(document.body),
+                    clickOutsideToClose: true,
+                    templateUrl        : "createGroupDialog.html"
+                });
+                createGroupController.$inject = ['$scope'];
+                function createGroupController($scope) {
+
+                    $scope.save = function () {};
+                    $scope.cancel = function () {
+                        $mdDialog.cancel();
+                    };
+                }
+            }
+        })
+</script>
+</body>
+</html>
+
+
